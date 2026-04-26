@@ -1,0 +1,13 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "mangul-lab-ju",
+    "description": "",
+    "home_page_url": "https://mangul-lab-ju.github.io",
+    "feed_url": "https://mangul-lab-ju.github.io/feed.json",
+    "user_comment": "",
+    "author": {
+        "name": "Serghei Mangul"
+    },
+    "items": [
+    ]
+}

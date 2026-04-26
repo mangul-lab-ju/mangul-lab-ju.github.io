@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://mangul-lab-ju.github.io/sitemap.xml
