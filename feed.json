@@ -14,42 +14,56 @@
             "url": "https://mangul-lab-ju.github.io/the-future-of-bioinformatics.html",
             "title": "The Future of Bioinformatics",
             "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Proin id est rhoncus, pretium quam vel, commodo velit. Curabitur convallis, odio nec varius ultrices, erat mi hendrerit ipsum, sit amet fringilla enim velit sit amet nisi. Sed a lacinia mauris. Sed vehicula neque eget&hellip;",
-            "content_html": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Proin id est rhoncus, pretium quam vel, commodo velit. Curabitur convallis, odio nec varius ultrices, erat mi hendrerit ipsum, sit amet fringilla enim velit sit amet nisi. Sed a lacinia mauris. Sed vehicula neque eget tellus rhoncus tristique.</p>\n        <p>Suspendisse potenti. Mauris accumsan est et ligula sagittis efficitur. Integer eget ipsum ullamcorper, dignissim orci vel, pellentesque metus. Quisque vel varius dui. Vivamus vitae felis sem. Donec vitae nunc sit amet metus aliquet tempor. In vehicula, orci a cursus tempor, neque augue viverra ex, a cursus nunc turpis eu felis.</p>",
+            "content_html": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Proin id est rhoncus, pretium quam vel, commodo velit. Curabitur convallis, odio nec varius ultrices, erat mi hendrerit ipsum, sit amet fringilla enim velit sit amet nisi. Sed a lacinia mauris. Sed vehicula neque eget tellus rhoncus tristique.</p>",
             "author": {
                 "name": "Serghei Mangul"
             },
             "tags": [
             ],
-            "date_published": "2026-04-26T10:00:00+02:00",
+            "date_published": "1970-01-01T01:00:02+01:00",
             "date_modified": "2026-04-26T10:00:00+02:00"
         },
         {
             "id": "https://mangul-lab-ju.github.io/lab-update-spring-2026.html",
             "url": "https://mangul-lab-ju.github.io/lab-update-spring-2026.html",
             "title": "Lab Update: Spring 2026",
-            "summary": "Spring is Here Phasellus eget risus id sem cursus lacinia at sed nulla. Morbi non mauris at odio tristique congue eget ac nisi. Cras ultrices varius tellus, sed interdum lacus finibus quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;&hellip;",
-            "content_html": "<h2>Spring is Here</h2>\n        <p>Phasellus eget risus id sem cursus lacinia at sed nulla. Morbi non mauris at odio tristique congue eget ac nisi. Cras ultrices varius tellus, sed interdum lacus finibus quis.</p>\n        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam vel felis at augue laoreet mollis. Sed dictum elit id nibh eleifend, at tempor odio elementum. Nullam commodo urna elit, sit amet lacinia ipsum varius eu. Sed et mauris risus.</p>\n        <ul>\n            <li>First point of our lorem ipsum list</li>\n            <li>Second point of the lorem ipsum list</li>\n            <li>Third important milestone</li>\n        </ul>\n        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>",
+            "summary": "Phasellus eget risus id sem cursus lacinia at sed nulla. Morbi non mauris at odio tristique congue eget ac nisi. Cras ultrices varius tellus, sed interdum lacus finibus quis.",
+            "content_html": "<p>Phasellus eget risus id sem cursus lacinia at sed nulla. Morbi non mauris at odio tristique congue eget ac nisi. Cras ultrices varius tellus, sed interdum lacus finibus quis.</p>",
             "author": {
                 "name": "Serghei Mangul"
             },
             "tags": [
             ],
-            "date_published": "2026-03-20T14:30:00+01:00",
-            "date_modified": "2026-04-26T03:09:47+02:00"
+            "date_published": "1970-01-01T01:00:02+01:00",
+            "date_modified": "2026-03-20T14:30:00+01:00"
         },
         {
             "id": "https://mangul-lab-ju.github.io/genomic-data-analysis-workshop.html",
             "url": "https://mangul-lab-ju.github.io/genomic-data-analysis-workshop.html",
             "title": "Genomic Data Analysis Workshop",
-            "summary": "Aenean sollicitudin euismod mauris, sed ullamcorper nibh tincidunt eget. Cras nec quam quis lacus tempus maximus in eget purus. In hac habitasse platea dictumst. Quisque tincidunt varius diam in sollicitudin. Maecenas scelerisque massa a lacus viverra imperdiet. Duis pellentesque libero a lorem mollis efficitur. Integer&hellip;",
-            "content_html": "<p>Aenean sollicitudin euismod mauris, sed ullamcorper nibh tincidunt eget. Cras nec quam quis lacus tempus maximus in eget purus.</p>\n        <p>In hac habitasse platea dictumst. Quisque tincidunt varius diam in sollicitudin. Maecenas scelerisque massa a lacus viverra imperdiet. Duis pellentesque libero a lorem mollis efficitur. Integer eget diam nulla. Aenean consectetur nisi vitae tellus venenatis, sed tristique justo facilisis. Suspendisse eu lacus in tortor hendrerit egestas eu iaculis magna.</p>\n        <blockquote><p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”</p></blockquote>\n        <p>Phasellus auctor tellus in sem facilisis, sit amet semper nulla dictum. Ut non scelerisque elit, et condimentum ligula. Aliquam id neque sapien. Donec euismod interdum purus eget pretium. Ut eu purus libero.</p>",
+            "summary": "Aenean sollicitudin euismod mauris, sed ullamcorper nibh tincidunt eget. Cras nec quam quis lacus tempus maximus in eget purus.",
+            "content_html": "<p>Aenean sollicitudin euismod mauris, sed ullamcorper nibh tincidunt eget. Cras nec quam quis lacus tempus maximus in eget purus.</p>",
             "author": {
                 "name": "Serghei Mangul"
             },
             "tags": [
             ],
-            "date_published": "2026-01-12T09:15:00+01:00",
-            "date_modified": "2026-04-26T03:09:47+02:00"
+            "date_published": "1970-01-01T01:00:02+01:00",
+            "date_modified": "2026-01-12T09:15:00+01:00"
+        },
+        {
+            "id": "https://mangul-lab-ju.github.io/contact.html",
+            "url": "https://mangul-lab-ju.github.io/contact.html",
+            "title": "Contact Us",
+            "summary": "Feel free to reach out to the Mangul Lab via our email or phone number. We are always looking for bright students and researchers to collaborate with!",
+            "content_html": "<p>Feel free to reach out to the Mangul Lab via our email or phone number. We are always looking for bright students and researchers to collaborate with!</p>",
+            "author": {
+                "name": "Serghei Mangul"
+            },
+            "tags": [
+            ],
+            "date_published": "1970-01-01T01:00:02+01:00",
+            "date_modified": "2026-01-01T12:00:00+01:00"
         }
     ]
 }

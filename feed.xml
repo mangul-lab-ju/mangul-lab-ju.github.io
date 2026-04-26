@@ -3,7 +3,7 @@
     <title>mangul-lab-ju</title>
     <link href="https://mangul-lab-ju.github.io/feed.xml" rel="self" />
     <link href="https://mangul-lab-ju.github.io" />
-    <updated>2026-04-26T10:00:00+02:00</updated>
+    <updated>1970-01-01T01:00:00+01:00</updated>
     <author>
         <name>Serghei Mangul</name>
     </author>
@@ -17,7 +17,7 @@
         <link href="https://mangul-lab-ju.github.io/the-future-of-bioinformatics.html"/>
         <id>https://mangul-lab-ju.github.io/the-future-of-bioinformatics.html</id>
 
-        <updated>2026-04-26T10:00:00+02:00</updated>
+        <updated>1970-01-01T01:00:02+01:00</updated>
             <summary type="html">
                 <![CDATA[
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Proin id est rhoncus, pretium quam vel, commodo velit. Curabitur convallis, odio nec varius ultrices, erat mi hendrerit ipsum, sit amet fringilla enim velit sit amet nisi. Sed a lacinia mauris. Sed vehicula neque eget&hellip;
@@ -26,7 +26,6 @@
         <content type="html">
             <![CDATA[
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Proin id est rhoncus, pretium quam vel, commodo velit. Curabitur convallis, odio nec varius ultrices, erat mi hendrerit ipsum, sit amet fringilla enim velit sit amet nisi. Sed a lacinia mauris. Sed vehicula neque eget tellus rhoncus tristique.</p>
-        <p>Suspendisse potenti. Mauris accumsan est et ligula sagittis efficitur. Integer eget ipsum ullamcorper, dignissim orci vel, pellentesque metus. Quisque vel varius dui. Vivamus vitae felis sem. Donec vitae nunc sit amet metus aliquet tempor. In vehicula, orci a cursus tempor, neque augue viverra ex, a cursus nunc turpis eu felis.</p>
             ]]>
         </content>
     </entry>
@@ -38,23 +37,15 @@
         <link href="https://mangul-lab-ju.github.io/lab-update-spring-2026.html"/>
         <id>https://mangul-lab-ju.github.io/lab-update-spring-2026.html</id>
 
-        <updated>2026-03-20T14:30:00+01:00</updated>
+        <updated>1970-01-01T01:00:02+01:00</updated>
             <summary type="html">
                 <![CDATA[
-                    Spring is Here Phasellus eget risus id sem cursus lacinia at sed nulla. Morbi non mauris at odio tristique congue eget ac nisi. Cras ultrices varius tellus, sed interdum lacus finibus quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;&hellip;
+                    Phasellus eget risus id sem cursus lacinia at sed nulla. Morbi non mauris at odio tristique congue eget ac nisi. Cras ultrices varius tellus, sed interdum lacus finibus quis.
                 ]]>
             </summary>
         <content type="html">
             <![CDATA[
-                <h2>Spring is Here</h2>
-        <p>Phasellus eget risus id sem cursus lacinia at sed nulla. Morbi non mauris at odio tristique congue eget ac nisi. Cras ultrices varius tellus, sed interdum lacus finibus quis.</p>
-        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam vel felis at augue laoreet mollis. Sed dictum elit id nibh eleifend, at tempor odio elementum. Nullam commodo urna elit, sit amet lacinia ipsum varius eu. Sed et mauris risus.</p>
-        <ul>
-            <li>First point of our lorem ipsum list</li>
-            <li>Second point of the lorem ipsum list</li>
-            <li>Third important milestone</li>
-        </ul>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+                <p>Phasellus eget risus id sem cursus lacinia at sed nulla. Morbi non mauris at odio tristique congue eget ac nisi. Cras ultrices varius tellus, sed interdum lacus finibus quis.</p>
             ]]>
         </content>
     </entry>
@@ -66,18 +57,35 @@
         <link href="https://mangul-lab-ju.github.io/genomic-data-analysis-workshop.html"/>
         <id>https://mangul-lab-ju.github.io/genomic-data-analysis-workshop.html</id>
 
-        <updated>2026-01-12T09:15:00+01:00</updated>
+        <updated>1970-01-01T01:00:02+01:00</updated>
             <summary type="html">
                 <![CDATA[
-                    Aenean sollicitudin euismod mauris, sed ullamcorper nibh tincidunt eget. Cras nec quam quis lacus tempus maximus in eget purus. In hac habitasse platea dictumst. Quisque tincidunt varius diam in sollicitudin. Maecenas scelerisque massa a lacus viverra imperdiet. Duis pellentesque libero a lorem mollis efficitur. Integer&hellip;
+                    Aenean sollicitudin euismod mauris, sed ullamcorper nibh tincidunt eget. Cras nec quam quis lacus tempus maximus in eget purus.
                 ]]>
             </summary>
         <content type="html">
             <![CDATA[
                 <p>Aenean sollicitudin euismod mauris, sed ullamcorper nibh tincidunt eget. Cras nec quam quis lacus tempus maximus in eget purus.</p>
-        <p>In hac habitasse platea dictumst. Quisque tincidunt varius diam in sollicitudin. Maecenas scelerisque massa a lacus viverra imperdiet. Duis pellentesque libero a lorem mollis efficitur. Integer eget diam nulla. Aenean consectetur nisi vitae tellus venenatis, sed tristique justo facilisis. Suspendisse eu lacus in tortor hendrerit egestas eu iaculis magna.</p>
-        <blockquote><p>“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.”</p></blockquote>
-        <p>Phasellus auctor tellus in sem facilisis, sit amet semper nulla dictum. Ut non scelerisque elit, et condimentum ligula. Aliquam id neque sapien. Donec euismod interdum purus eget pretium. Ut eu purus libero.</p>
+            ]]>
+        </content>
+    </entry>
+    <entry>
+        <title>Contact Us</title>
+        <author>
+            <name>Serghei Mangul</name>
+        </author>
+        <link href="https://mangul-lab-ju.github.io/contact.html"/>
+        <id>https://mangul-lab-ju.github.io/contact.html</id>
+
+        <updated>1970-01-01T01:00:02+01:00</updated>
+            <summary type="html">
+                <![CDATA[
+                    Feel free to reach out to the Mangul Lab via our email or phone number. We are always looking for bright students and researchers to collaborate with!
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>Feel free to reach out to the Mangul Lab via our email or phone number. We are always looking for bright students and researchers to collaborate with!</p>
             ]]>
         </content>
     </entry>
