@@ -9,5 +9,19 @@
         "name": "Serghei Mangul"
     },
     "items": [
+        {
+            "id": "https://mangul-lab-ju.github.io/test.html",
+            "url": "https://mangul-lab-ju.github.io/test.html",
+            "title": "Test",
+            "summary": "first test post",
+            "content_html": "<p>first test post</p>",
+            "author": {
+                "name": "Serghei Mangul"
+            },
+            "tags": [
+            ],
+            "date_published": "2026-04-26T03:00:35+02:00",
+            "date_modified": "2026-04-26T03:00:35+02:00"
+        }
     ]
 }

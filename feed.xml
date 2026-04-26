@@ -3,10 +3,30 @@
     <title>mangul-lab-ju</title>
     <link href="https://mangul-lab-ju.github.io/feed.xml" rel="self" />
     <link href="https://mangul-lab-ju.github.io" />
-    <updated>1970-01-01T01:00:00+01:00</updated>
+    <updated>2026-04-26T03:00:35+02:00</updated>
     <author>
         <name>Serghei Mangul</name>
     </author>
     <id>https://mangul-lab-ju.github.io</id>
 
+    <entry>
+        <title>Test</title>
+        <author>
+            <name>Serghei Mangul</name>
+        </author>
+        <link href="https://mangul-lab-ju.github.io/test.html"/>
+        <id>https://mangul-lab-ju.github.io/test.html</id>
+
+        <updated>2026-04-26T03:00:35+02:00</updated>
+            <summary type="html">
+                <![CDATA[
+                    first test post
+                ]]>
+            </summary>
+        <content type="html">
+            <![CDATA[
+                <p>first test post</p>
+            ]]>
+        </content>
+    </entry>
 </feed>
