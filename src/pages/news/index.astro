@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { truncateText } from '../../utils/text';
 
 const allNews = await getCollection('news');
 const sortedNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -18,14 +19,16 @@ const sortedNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.va
 		<div class="grid-cards">
 			{sortedNews.map(news => (
 				<article class="card news-card">
-					{news.data.thumbnail && (
+					{news.data.thumbnail ? (
 						<img src={news.data.thumbnail} alt="" class="news-card-image" loading="lazy" />
+					) : (
+						<img src="/temp.png" alt="" class="news-card-image" loading="lazy" />
 					)}
 					<div class="news-content">
 						{news.data.highlight && <span class="tag card-actions" style="background-color: var(--color-accent); color: white; display: inline-block;">Highlight</span>}
 						<p class="date">{news.data.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
 						<h3><a href={`/news/${news.id}`} class="clickable-card-link">{news.data.title}</a></h3>
-						<p>{news.data.description}</p>
+						<p>{truncateText(news.data.description, 40)}</p>
 					</div>
 				</article>
 			))}

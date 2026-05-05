@@ -1,9 +1,8 @@
 ---
-title: "Lab Update: Exciting Findings in Q3 2023"
-date: 2023-07-15
-author: "Dr. Serghei Mangul"
-description: "We are thrilled to announce our latest breakthrough in computational biology."
-thumbnail: "https://picsum.photos/seed/news7/800/600"
-highlight: false
+title: "Serghei Mangul Receives USC-IISc Collaborative Network Award"
+date: 2024-06-03
+thumbnail: "/images/news/Serghei-Mangul-Receives-Collaborative-Network-Award.jpeg"
+description: "Serghei Mangul, PhD has received a USC and Indian Institute of Science (USC-IISc) Collaborative Network Award for $5,000 to collaborate with Prof. Debnath Pal from Indian Institute of Science on the project 'Developing robust and scalable bioinformatics tools and databases for RNA viral discovery and characterization from metagenomics data.'"
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+[Read more](https://research.usc.edu/news/2024/06/usc-oori-awards-four-projects-under-new-usc-iisc-collaborative-research-program-2/)

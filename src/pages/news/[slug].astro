@@ -25,9 +25,13 @@ const { Content } = await render(entry);
 
 	<div class="container section">
 		<article class="content-wrapper">
-			{entry.data.thumbnail && (
+			{entry.data.thumbnail ? (
 				<div class="content-image">
 					<img src={entry.data.thumbnail} alt={entry.data.title} />
+				</div>
+			) : (
+				<div class="content-image">
+					<img src="/temp.png" alt={entry.data.title} />
 				</div>
 			)}
 			<div class="prose">

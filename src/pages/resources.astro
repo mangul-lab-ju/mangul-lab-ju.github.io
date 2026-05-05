@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { truncateText } from '../utils/text';
 
 const allResources = await getCollection('resources');
 const featuredResources = allResources.filter(r => r.data.featured);
@@ -23,7 +24,7 @@ const otherResources = allResources.filter(r => !r.data.featured);
 					{featuredResources.map(resource => (
 						<div class="card resource-card featured">
 							<h3><a href={`/resources/${resource.id}`} class="clickable-card-link">{resource.data.title}</a></h3>
-							<p>{resource.data.description}</p>
+							<p>{truncateText(resource.data.description, 35)}</p>
 							<div class="tags card-actions" style="position: relative; z-index: 2;">
 								{resource.data.tags.map(tag => <span class="tag" style="display: inline-block;">{tag}</span>)}
 							</div>
@@ -38,12 +39,45 @@ const otherResources = allResources.filter(r => !r.data.featured);
 			{otherResources.map(resource => (
 				<div class="card resource-card">
 					<h3><a href={`/resources/${resource.id}`} class="clickable-card-link">{resource.data.title}</a></h3>
-					<p>{resource.data.description}</p>
+					<p>{truncateText(resource.data.description, 35)}</p>
 					<div class="tags card-actions" style="position: relative; z-index: 2;">
 						{resource.data.tags.map(tag => <span class="tag" style="display: inline-block;">{tag}</span>)}
 					</div>
 				</div>
 			))}
+		</div>
+
+		<h2 style="margin-top: var(--space-xl); margin-bottom: var(--space-md); border-bottom: 2px solid var(--color-border); padding-bottom: var(--space-xs); display: inline-block;">Bioinformatics for Ukraine</h2>
+		<div style="display: flex; gap: var(--space-lg); align-items: flex-start; flex-wrap: wrap;">
+			<div style="flex: 1; min-width: 300px;">
+				<p>Kick off the season by showing your support for <a href="http://bioinformaticsforukraine.com/">Bioinformatics for Ukraine</a>, a noble initiative aimed at support for Ukrainian scientists and students whose lives have been deeply affected by the ongoing conflict.</p>
+				<p>Donating is quick and easy – simply click on the Donate Now button, and your generosity will provide essential support to both aspiring and current fellows of the Bioinformatics for Ukraine initiative.</p>
+				<a href="https://www.betterunite.com/bioinformaticsforukraine-empowerdreamsscholarshipfundforukrainianscholars" target="_blank" class="btn btn-primary mt-sm">Donate Now</a>
+			</div>
+		</div>
+
+		<h2 style="margin-top: var(--space-xl); margin-bottom: var(--space-md); border-bottom: 2px solid var(--color-border); padding-bottom: var(--space-xs); display: inline-block;">Funding Opportunities</h2>
+		<p>We are prepared to help our members apply for internal and external awards for research, travel, and education support!</p>
+		<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg); margin-top: var(--space-md);">
+			<div class="card">
+				<h3 style="margin-bottom: var(--space-sm);">Undergraduate</h3>
+				<ul style="padding-left: var(--space-md);">
+					<li><a href="https://undergrad.usc.edu/experience/research/undergrad_research/">USC Provost Undergrad Research Fellowships</a></li>
+					<li><a href="https://dornsife.usc.edu/soar">USC Dornsife SOAR</a></li>
+					<li><a href="https://dornsife.usc.edu/surf-shure/">USC Dornsife SURF</a></li>
+					<li><a href="https://goldwater.scholarsapply.org/eligibility/">Goldwater Scholarship</a></li>
+					<li><a href="https://cra.org/crae/awards/cra-outstanding-undergraduate-researchers/">CRA Outstanding Undergraduate Researcher Awards</a></li>
+				</ul>
+			</div>
+			<div class="card">
+				<h3 style="margin-bottom: var(--space-sm);">Graduate & Postdoc</h3>
+				<ul style="padding-left: var(--space-md);">
+					<li><a href="https://www.nsfgrfp.org/">NSF GRFP</a></li>
+					<li><a href="https://sites.nationalacademies.org/PGA/FordFellowships/PGA_171962">Ford Foundation Predoctoral Fellowship</a></li>
+					<li><a href="https://sites.nationalacademies.org/PGA/FordFellowships/PGA_171939">Ford Foundation Dissertation Fellowship</a></li>
+					<li><a href="https://sites.nationalacademies.org/PGA/FordFellowships/PGA_171940">Ford Foundation Postdoctoral Fellowship</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </Layout>

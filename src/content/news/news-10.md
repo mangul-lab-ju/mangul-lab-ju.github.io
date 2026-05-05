@@ -1,9 +1,8 @@
 ---
-title: "Lab Update: Exciting Findings in Q3 2023"
-date: 2023-02-15
-author: "Dr. Serghei Mangul"
-description: "We are thrilled to announce our latest breakthrough in computational biology."
-thumbnail: "https://picsum.photos/seed/news2/800/600"
-highlight: false
+title: "Mangul lab publishes study focusing on accessibility, diversity and inclusion at virtual scientific conferences"
+date: 2022-01-10
+thumbnail: "/images/news/Mangul-lab-publishes-study-focusing-on-accessibility-diversity-and-inclusion-at-virtual-scientific-conferences.png"
+description: "Our paper 'Virtual meetings promise to eliminate geographical and administrative barriers and increase accessibility, diversity and inclusivity' was highlighted in the USC Pharmacy news."
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+[Read more](https://pharmacyschool.usc.edu/news/study-focuses-on-accessibility-diversity-and-inclusion-at-virtual-scientific-conferences/)

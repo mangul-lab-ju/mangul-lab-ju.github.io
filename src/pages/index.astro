@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { truncateText } from '../utils/text';
 
 // Fetch collections
 const allNews = await getCollection('news');
@@ -14,7 +15,8 @@ const featuredResearch = allResearch
   .slice(0, 3);
 
 const allTeam = await getCollection('team');
-const teamPreview = allTeam.slice(0, 3);
+// Provide a default preview for SSR fallback, though it will be overwritten by JS
+const teamPreview = allTeam.slice(0, 4);
 
 // Manual stats configuration (set to null to use dynamic counts)
 const manualStats = {
@@ -72,7 +74,7 @@ const displayStats = {
 					<img src="https://mangul-lab-usc.github.io/images/team/IMG-3719.jpg" alt="Mangul Lab Team" style="width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-md); box-shadow: var(--shadow-md); object-fit: cover; aspect-ratio: 16/9;" loading="lazy" />
 					<p>We are a team of enthusiastic researchers aimed to combine open omics data with robust bioinformatics methods to enable novel biological discoveries. We are committed to ensuring an inclusive and supportive environment. We also believe in empowering the members of our team with necessary bioinformatics training and support, allowing them to make important contributions to the fields of biomedical research.</p>
 				</div>
-				<div class="grid-team">
+				<div class="grid-team" id="random-team-container">
 					{teamPreview.map(member => (
 						<div class="team-card card">
 							<a href={`/team/${member.id}`} style="text-decoration: none;" class="clickable-card-link">
@@ -91,6 +93,33 @@ const displayStats = {
 						</div>
 					))}
 				</div>
+				<script is:inline define:vars={{ allTeamData: allTeam.map(m => ({ id: m.id, name: m.data.name, role: m.data.role, image: m.data.image, googleScholar: m.data.googleScholar, github: m.data.github })) }}>
+					document.addEventListener('DOMContentLoaded', () => {
+						const container = document.getElementById('random-team-container');
+						if (!container) return;
+						
+						const shuffled = [...allTeamData].sort(() => 0.5 - Math.random());
+						const selected = shuffled.slice(0, 4);
+						
+						let html = '';
+						for (const member of selected) {
+							html += `
+								<div class="team-card card">
+									<a href="/team/${member.id}" style="text-decoration: none;" class="clickable-card-link">
+										${member.image ? `<img src="${member.image}" alt="${member.name}" class="team-avatar" loading="lazy" />` : `<div class="team-avatar"></div>`}
+										<h3>${member.name}</h3>
+									</a>
+									<p>${member.role}</p>
+									<div class="social-links card-actions" style="position: relative; z-index: 2;">
+										${member.googleScholar ? `<a href="${member.googleScholar}" target="_blank" rel="noopener">Scholar</a>` : ''}
+										${member.github ? `<a href="${member.github}" target="_blank" rel="noopener">GitHub</a>` : ''}
+									</div>
+								</div>
+							`;
+						}
+						container.innerHTML = html;
+					});
+				</script>
 			</div>
 		</div>
 	</section>
@@ -104,14 +133,16 @@ const displayStats = {
 			<div class="grid-cards">
 				{latestNews.map(news => (
 					<article class="card news-card">
-						{news.data.thumbnail && (
+						{news.data.thumbnail ? (
 							<img src={news.data.thumbnail} alt="" class="news-card-image" loading="lazy" />
+						) : (
+							<img src="/temp.png" alt="" class="news-card-image" loading="lazy" />
 						)}
 						<div class="news-card-content">
 							{news.data.highlight && <span class="tag card-actions" style="background-color: var(--color-accent); color: white; display: inline-block;">Highlight</span>}
 							<h3><a href={`/news/${news.id}`} class="clickable-card-link">{news.data.title}</a></h3>
 							<p class="date">{news.data.date.toLocaleDateString()}</p>
-							<p>{news.data.description}</p>
+							<p>{truncateText(news.data.description, 35)}</p>
 						</div>
 					</article>
 				))}
@@ -222,17 +253,17 @@ const displayStats = {
 		margin-top: var(--space-sm);
 	}
 
-	.grid-team {
+	:global(.grid-team) {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 		gap: var(--space-md);
 	}
 
-	.team-card {
+	:global(.team-card) {
 		text-align: center;
 	}
 
-	.team-avatar {
+	:global(.team-avatar) {
 		width: 120px;
 		height: 120px;
 		border-radius: var(--radius-full);
@@ -244,7 +275,7 @@ const displayStats = {
 		display: block;
 	}
 
-	.role {
+	:global(.role) {
 		color: var(--color-primary);
 		font-weight: 500;
 	}

@@ -1,9 +1,8 @@
 ---
-title: "Lab Update: Exciting Findings in Q1 2023"
-date: 2023-05-15
-author: "Dr. Serghei Mangul"
-description: "We are thrilled to announce our latest breakthrough in computational biology."
-thumbnail: "https://picsum.photos/seed/news5/800/600"
-highlight: false
+title: "Nature Methods Interviews Serghei Mangul about organizing bioinformatics summer schools"
+date: 2024-08-05
+thumbnail: "/images/news/nature-methods-interviews-serghei-about-grant-writing.jpeg"
+description: "Amid the brutality of war around them, some Ukrainian scientists find calm in bioinformatics."
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+[Read more](https://www.nature.com/articles/s41592-024-02329-z)

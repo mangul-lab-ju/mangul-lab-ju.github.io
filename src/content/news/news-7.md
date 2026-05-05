@@ -1,9 +1,8 @@
 ---
-title: "Lab Update: Exciting Findings in Q4 2024"
-date: 2024-08-15
-author: "Dr. Serghei Mangul"
-description: "We are thrilled to announce our latest breakthrough in computational biology."
-thumbnail: "https://picsum.photos/seed/news8/800/600"
-highlight: false
+title: "Mangul Receives Zumberge Award"
+date: 2024-05-28
+thumbnail: "/images/news/collage-photo-usc-mann-copy-1024x576.jpg"
+description: "Serghei Mangul, PhD, has received the Zumberge Preliminary Studies Large Program Award, a $100,000 grant, for the project “Developing Reliable and Scalable Methods for Deep Immune Phenotyping in Public Transcriptomics Databases Across Diverse Populations."
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+[Read more](https://mann.usc.edu/news/faculty-receive-zumberge-awards/)

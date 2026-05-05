@@ -1,9 +1,8 @@
 ---
-title: "Lab Update: Exciting Findings in Q2 2024"
-date: 2024-06-15
-author: "Dr. Serghei Mangul"
-description: "We are thrilled to announce our latest breakthrough in computational biology."
-thumbnail: "https://picsum.photos/seed/news6/800/600"
-highlight: false
+title: "Nature Methods Interviews Serghei Mangul about Grant Writing"
+date: 2024-06-08
+thumbnail: "/images/news/nature-methods-interviews-serghei-about-grant-writing.jpeg"
+description: "Nature Methods interviews Serghei Mangul about grant writing, discussing his experiences and tips for successful grant applications."
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+[Read more](https://www.nature.com/articles/s41592-023-01920-0)

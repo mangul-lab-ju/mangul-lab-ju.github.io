@@ -1,9 +1,8 @@
 ---
-title: "Lab Update: Exciting Findings in Q3 2023"
-date: 2023-03-15
-author: "Dr. Serghei Mangul"
-description: "We are thrilled to announce our latest breakthrough in computational biology."
-thumbnail: "https://picsum.photos/seed/news3/800/600"
-highlight: true
+title: "Yu Ning Huang appointed as a Mentored Teaching Fellow"
+date: 2024-08-14
+thumbnail: "/images/news/usc_logo.png"
+description: "Yu Ning Huang has been appointed as a Mentored Teaching Fellow for the CXPT 501 class in Biomedical Data Sciences."
 ---
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+[Read more](https://cet.usc.edu/mentored-teaching-fellows/)

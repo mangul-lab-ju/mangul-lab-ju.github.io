@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { truncateText } from '../utils/text';
 
 const allSoftware = await getCollection('software');
 const featuredSoftware = allSoftware.filter(s => s.data.featured);
@@ -28,7 +29,7 @@ const otherSoftware = allSoftware.filter(s => !s.data.featured);
 									{tool.data.status}
 								</span>
 							</div>
-							<p>{tool.data.description}</p>
+							<p>{truncateText(tool.data.description, 35)}</p>
 							<a href={tool.data.github} target="_blank" rel="noopener" class="btn btn-secondary mt-md clickable-card-link" style="width: 100%;">View on GitHub</a>
 						</div>
 					))}
@@ -46,7 +47,7 @@ const otherSoftware = allSoftware.filter(s => !s.data.featured);
 							{tool.data.status}
 						</span>
 					</div>
-					<p>{tool.data.description}</p>
+					<p>{truncateText(tool.data.description, 35)}</p>
 					<a href={tool.data.github} target="_blank" rel="noopener" class="btn btn-secondary mt-md clickable-card-link" style="width: 100%;">View on GitHub</a>
 				</div>
 			))}
