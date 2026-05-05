@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact Us">
+	<div class="page-header">
+		<div class="container">
+			<h1>Contact Us</h1>
+			<p>Get in touch with the Mangul Lab team.</p>
+		</div>
+	</div>
+
+	<div class="container section">
+		<div class="contact-layout">
+			<div class="contact-info card">
+				<h2>Contact Information</h2>
+				<p>We are always open to collaborations, questions about our research, or inquiries from prospective students and postdocs.</p>
+				
+				<div class="info-block mt-md">
+					<h3>Address</h3>
+					<p>Jagiellonian University<br>Malopolska Centre of Biotechnology<br>ul. Gronostajowa 7<br>30-3847 Kraków, Poland</p>
+				</div>
+
+				<div class="info-block">
+					<h3>Email</h3>
+					<p><a href="mailto:contact@mangullab.org">contact@mangullab.org</a></p>
+				</div>
+
+				<div class="info-block">
+					<h3>Follow Us</h3>
+					<p>
+						<a href="#" target="_blank" rel="noopener">Twitter / X</a><br>
+						<a href="#" target="_blank" rel="noopener">GitHub</a>
+					</p>
+				</div>
+			</div>
+
+			<div class="contact-form card">
+				<h2>Send a Message</h2>
+				<form action="https://formspree.io/f/example" method="POST">
+					<div class="form-group">
+						<label for="name">Name</label>
+						<input type="text" id="name" name="name" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="subject">Subject</label>
+						<input type="text" id="subject" name="subject" class="form-control" required>
+					</div>
+					<div class="form-group">
+						<label for="message">Message</label>
+						<textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary mt-md" style="width: 100%;">Send Message</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+	}
+
+	.page-header p {
+		color: #cbd5e1;
+		font-size: 1.1rem;
+	}
+
+	.contact-layout {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-lg);
+	}
+
+	@media (max-width: 768px) {
+		.contact-layout {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.contact-info h2, .contact-form h2 {
+		margin-bottom: var(--space-md);
+		border-bottom: 2px solid var(--color-border);
+		padding-bottom: var(--space-xs);
+	}
+
+	.info-block {
+		margin-bottom: var(--space-md);
+	}
+
+	.info-block h3 {
+		font-size: 1.1rem;
+		margin-bottom: var(--space-xs);
+		color: var(--color-primary);
+	}
+
+	.form-group label {
+		display: block;
+		font-weight: 500;
+		margin-bottom: 0.3rem;
+	}
+</style>

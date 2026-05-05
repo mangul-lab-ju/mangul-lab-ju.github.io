@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allEducation = await getCollection('education');
+---
+
+<Layout title="Education">
+	<div class="page-header">
+		<div class="container">
+			<h1>Education</h1>
+			<p>Courses and educational materials provided by the Mangul Lab.</p>
+		</div>
+	</div>
+
+	<div class="container section">
+		<div class="grid-cards">
+			{allEducation.map(course => (
+				<div class="card">
+					<div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-xs);">
+						<h3 class="card-actions" style="position: relative; z-index: 2;">{course.data.title}</h3>
+						<span class="tag card-actions" style="position: relative; z-index: 2; display: inline-block;">{course.data.level}</span>
+					</div>
+					<p style="color: var(--color-primary); font-weight: 500; margin-bottom: var(--space-sm);">{course.data.topic}</p>
+					<p>{course.data.description}</p>
+					<a href={course.data.link} target="_blank" rel="noopener" class="btn btn-secondary mt-md clickable-card-link">View Course</a>
+				</div>
+			))}
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+	}
+
+	.page-header p {
+		color: #cbd5e1;
+		font-size: 1.1rem;
+	}
+</style>

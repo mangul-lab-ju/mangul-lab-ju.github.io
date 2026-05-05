@@ -1,0 +1,266 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allResearch = await getCollection('research');
+
+// Extract unique years and types for filters
+const years = [...new Set(allResearch.map(item => item.data.year))].sort((a, b) => b - a);
+const types = [...new Set(allResearch.map(item => item.data.type))].sort();
+const allTags = allResearch.flatMap(item => item.data.tags);
+const tags = [...new Set(allTags)].sort();
+
+// Pass data to client script
+const searchData = allResearch.map(item => ({
+  id: item.id,
+  title: item.data.title,
+  authors: item.data.authors.join(', '),
+  year: item.data.year,
+  type: item.data.type,
+  journal: item.data.journal,
+  tags: item.data.tags.join(', ')
+}));
+---
+
+<Layout title="Research Publications">
+	<div class="page-header">
+		<div class="container">
+			<h1>Research Publications</h1>
+			<p>Explore our latest findings, methodologies, and tools.</p>
+		</div>
+	</div>
+
+	<div class="container section">
+		<div class="research-layout">
+			<aside class="filters">
+				<div class="form-group">
+					<label for="search">Search</label>
+					<input type="text" id="search" class="form-control" placeholder="Search title, authors, keywords...">
+				</div>
+				
+				<div class="form-group">
+					<label for="year-filter">Year</label>
+					<select id="year-filter" class="form-control">
+						<option value="">All Years</option>
+						{years.map(year => <option value={year}>{year}</option>)}
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="type-filter">Publication Type</label>
+					<select id="type-filter" class="form-control">
+						<option value="">All Types</option>
+						{types.map(type => <option value={type}>{type}</option>)}
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="tag-filter">Keyword</label>
+					<select id="tag-filter" class="form-control">
+						<option value="">All Keywords</option>
+						{tags.map(tag => <option value={tag}>{tag}</option>)}
+					</select>
+				</div>
+			</aside>
+
+			<div class="publications-list-wrapper">
+				<p id="results-count" style="margin-bottom: var(--space-sm); font-weight: 500; color: var(--color-text-muted);">Showing {allResearch.length} publications</p>
+				<div class="publications-list" id="results-container">
+				{allResearch.map(pub => (
+					<article class="card pub-item" data-id={pub.id} data-year={pub.data.year} data-type={pub.data.type} data-tags={pub.data.tags.join(',')}>
+						<div class="pub-header card-actions" style="position: relative; z-index: 2;">
+							<span class="tag" style="display: inline-block;">{pub.data.type}</span>
+							<span class="meta">{pub.data.year}</span>
+						</div>
+						<h3><a href={`/research/${pub.id}`} class="clickable-card-link">{pub.data.title}</a></h3>
+						<p class="authors">{pub.data.authors.join(', ')}</p>
+						<p class="journal">{pub.data.journal}</p>
+						<div class="tags card-actions" style="position: relative; z-index: 2;">
+							{pub.data.tags.map(tag => <span class="tag-small">{tag}</span>)}
+						</div>
+					</article>
+				))}
+				<div id="no-results" style="display: none; text-align: center; padding: var(--space-lg);">
+					<p>No publications found matching your criteria.</p>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<script>
+	import Fuse from 'fuse.js';
+
+	// Parse JSON data passed from Astro frontmatter
+	const searchData = JSON.parse(document.getElementById('search-data')?.textContent || '[]');
+
+	const fuse = new Fuse(searchData, {
+		keys: ['title', 'authors', 'tags'],
+		threshold: 0.1,
+		ignoreLocation: true
+	});
+
+	const searchInput = document.getElementById('search') as HTMLInputElement;
+	const yearFilter = document.getElementById('year-filter') as HTMLSelectElement;
+	const typeFilter = document.getElementById('type-filter') as HTMLSelectElement;
+	const tagFilter = document.getElementById('tag-filter') as HTMLSelectElement;
+	const resultsContainer = document.getElementById('results-container');
+	const noResultsMsg = document.getElementById('no-results');
+	const resultsCount = document.getElementById('results-count');
+	const items = document.querySelectorAll('.pub-item');
+
+	function filterResults() {
+		const query = searchInput.value.trim();
+		const year = yearFilter.value;
+		const type = typeFilter.value;
+		const tag = tagFilter.value;
+
+		let matchedIds = new Set(searchData.map(d => d.id));
+
+		if (query) {
+			const fuseResults = fuse.search(query);
+			matchedIds = new Set(fuseResults.map(r => r.item.id));
+		}
+
+		let visibleCount = 0;
+
+		items.forEach((item: Element) => {
+			const el = item as HTMLElement;
+			const id = el.dataset.id!;
+			const itemYear = el.dataset.year;
+			const itemType = el.dataset.type;
+			const itemTags = el.dataset.tags || "";
+
+			let visible = true;
+
+			if (!matchedIds.has(id)) visible = false;
+			if (year && itemYear !== year) visible = false;
+			if (type && itemType !== type) visible = false;
+			if (tag && !itemTags.includes(tag)) visible = false;
+
+			if (visible) {
+				el.style.display = 'block';
+				visibleCount++;
+			} else {
+				el.style.display = 'none';
+			}
+		});
+
+		if (noResultsMsg) {
+			noResultsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+		}
+
+		if (resultsCount) {
+			resultsCount.innerText = `Showing ${visibleCount} publications`;
+		}
+	}
+
+	searchInput?.addEventListener('input', filterResults);
+	yearFilter?.addEventListener('change', filterResults);
+	typeFilter?.addEventListener('change', filterResults);
+	tagFilter?.addEventListener('change', filterResults);
+</script>
+
+<script id="search-data" type="application/json" set:html={JSON.stringify(searchData)} />
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+	}
+
+	.page-header p {
+		color: #cbd5e1;
+		font-size: 1.1rem;
+	}
+
+	.research-layout {
+		display: grid;
+		grid-template-columns: 250px 1fr;
+		gap: var(--space-lg);
+	}
+
+	@media (max-width: 768px) {
+		.research-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.filters {
+			position: relative;
+			top: 0;
+			margin-bottom: var(--space-md);
+		}
+	}
+
+	.filters {
+		background: var(--color-white);
+		padding: var(--space-md);
+		border-radius: var(--radius-md);
+		border: 1px solid var(--color-border);
+		height: fit-content;
+		position: sticky;
+		top: calc(4rem + var(--space-md));
+	}
+
+	.filters label {
+		display: block;
+		font-weight: 600;
+		margin-bottom: var(--space-xs);
+		font-size: 0.9rem;
+	}
+
+	.pub-item {
+		margin-bottom: var(--space-md);
+	}
+
+	.pub-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--space-xs);
+	}
+
+	.pub-item h3 {
+		margin-bottom: var(--space-xs);
+		font-size: 1.25rem;
+	}
+
+	.pub-item h3 a {
+		color: var(--color-text);
+	}
+
+	.pub-item h3 a:hover {
+		color: var(--color-primary);
+	}
+
+	.authors {
+		font-weight: 500;
+		color: var(--color-text);
+		margin-bottom: 0.2rem;
+	}
+
+	.journal {
+		color: var(--color-text-muted);
+		font-style: italic;
+		margin-bottom: var(--space-sm);
+	}
+
+	.tag-small {
+		display: inline-block;
+		background-color: var(--color-bg);
+		color: var(--color-text-muted);
+		padding: 0.1rem 0.5rem;
+		border-radius: var(--radius-sm);
+		font-size: 0.75rem;
+		margin-right: 0.3rem;
+		border: 1px solid var(--color-border);
+	}
+</style>

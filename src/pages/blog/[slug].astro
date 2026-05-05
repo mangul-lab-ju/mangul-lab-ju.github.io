@@ -1,0 +1,107 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const blog = await getCollection('blog');
+  return blog.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// Estimate reading time (rough calculation)
+const wordCount = entry.body?.split(/\s+/g).length || 0;
+const readingTime = Math.max(1, Math.ceil(wordCount / 200));
+---
+
+<Layout title={entry.data.title}>
+	<div class="page-header">
+		<div class="container">
+			<a href="/blog" class="back-link">&larr; Back to Blog</a>
+			<div class="meta">
+				<span class="date">{entry.data.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+				<span class="separator">&bull;</span>
+				<span>{entry.data.author}</span>
+				<span class="separator">&bull;</span>
+				<span>{readingTime} min read</span>
+			</div>
+			<h1>{entry.data.title}</h1>
+			<div class="tags-container" style="justify-content: center; margin-top: var(--space-sm);">
+				{entry.data.tags.map(tag => (
+					<span class="tag" style="background-color: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">{tag}</span>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<div class="container section">
+		<article class="content-wrapper">
+			<div class="prose">
+				<Content />
+			</div>
+		</article>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+
+	.back-link {
+		color: #cbd5e1;
+		display: inline-block;
+		margin-bottom: var(--space-md);
+		font-weight: 500;
+	}
+
+	.back-link:hover {
+		color: var(--color-white);
+	}
+
+	.meta {
+		color: #cbd5e1;
+		font-size: 0.95rem;
+		margin-bottom: var(--space-xs);
+	}
+
+	.separator {
+		margin: 0 0.5rem;
+		opacity: 0.5;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		max-width: 800px;
+		margin: 0 auto;
+		font-size: 2.5rem;
+	}
+
+	.tags-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.content-wrapper {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.prose p {
+		margin-bottom: var(--space-sm);
+		font-size: 1.1rem;
+		line-height: 1.7;
+	}
+
+	.prose h2 {
+		margin-top: var(--space-lg);
+	}
+</style>

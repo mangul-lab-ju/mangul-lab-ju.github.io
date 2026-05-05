@@ -1,0 +1,106 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const news = await getCollection('news');
+  return news.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={entry.data.title}>
+	<div class="page-header">
+		<div class="container">
+			<a href="/news" class="back-link">&larr; Back to News</a>
+			<p class="date">{entry.data.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} &bull; {entry.data.author}</p>
+			<h1>{entry.data.title}</h1>
+		</div>
+	</div>
+
+	<div class="container section">
+		<article class="content-wrapper">
+			{entry.data.thumbnail && (
+				<div class="content-image">
+					<img src={entry.data.thumbnail} alt={entry.data.title} />
+				</div>
+			)}
+			<div class="prose">
+				<p class="lead-text"><strong>{entry.data.description}</strong></p>
+				<Content />
+			</div>
+		</article>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+	
+	.content-image {
+		width: 100%;
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		margin-bottom: var(--space-lg);
+		background-color: var(--color-bg);
+	}
+	
+	.content-image img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.back-link {
+		color: #cbd5e1;
+		display: inline-block;
+		margin-bottom: var(--space-md);
+		font-weight: 500;
+	}
+
+	.back-link:hover {
+		color: var(--color-white);
+	}
+
+	.date {
+		color: #cbd5e1;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin-bottom: var(--space-xs);
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		max-width: 800px;
+		margin: 0 auto;
+		font-size: 2.5rem;
+	}
+
+	.content-wrapper {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.lead-text {
+		font-size: 1.25rem;
+		line-height: 1.6;
+		margin-bottom: var(--space-md);
+		color: var(--color-primary-dark);
+	}
+
+	.prose p {
+		margin-bottom: var(--space-sm);
+		font-size: 1.1rem;
+		line-height: 1.7;
+	}
+</style>

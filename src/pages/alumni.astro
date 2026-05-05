@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allAlumni = await getCollection('alumni');
+---
+
+<Layout title="Alumni">
+	<div class="page-header">
+		<div class="container">
+			<h1>Alumni</h1>
+			<p>Past members of the Mangul Lab.</p>
+		</div>
+	</div>
+
+	<div class="container section">
+		<div class="grid-cards">
+			{allAlumni.map(alumnus => (
+				<div class="card">
+					<h3>{alumnus.data.name}</h3>
+					<p style="color: var(--color-primary); font-weight: 500;">{alumnus.data.role}</p>
+					<p style="color: var(--color-text-muted);">{alumnus.data.period}</p>
+					{alumnus.data.currentAffiliation && (
+						<p style="margin-top: var(--space-sm); font-size: 0.9rem;">
+							<strong>Current:</strong> {alumnus.data.currentAffiliation}
+						</p>
+					)}
+				</div>
+			))}
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+	}
+
+	.page-header p {
+		color: #cbd5e1;
+		font-size: 1.1rem;
+	}
+</style>

@@ -1,0 +1,101 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources');
+  return resources.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Layout title={entry.data.title}>
+	<div class="page-header">
+		<div class="container">
+			<a href="/resources" class="back-link">&larr; Back to Resources</a>
+			<h1>{entry.data.title}</h1>
+			{entry.data.featured && <span class="tag" style="background-color: var(--color-accent); color: white;">Featured Resource</span>}
+		</div>
+	</div>
+
+	<div class="container section">
+		<div class="resource-layout">
+			<article class="content">
+				<div class="prose">
+					<Content />
+				</div>
+			</article>
+
+			<aside class="sidebar">
+				<div class="card action-card">
+					<h3>Access Resource</h3>
+					<p style="margin-bottom: var(--space-md); color: var(--color-text-muted);">{entry.data.description}</p>
+					<a href={entry.data.link} target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">Open Resource</a>
+				</div>
+
+				<div class="card tags-card" style="margin-top: var(--space-md);">
+					<h3>Tags</h3>
+					<div class="tags-container">
+						{entry.data.tags.map(tag => (
+							<span class="tag">{tag}</span>
+						))}
+					</div>
+				</div>
+			</aside>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+		font-size: 2.5rem;
+	}
+
+	.back-link {
+		color: #cbd5e1;
+		display: inline-block;
+		margin-bottom: var(--space-sm);
+		font-weight: 500;
+	}
+
+	.back-link:hover {
+		color: var(--color-white);
+	}
+
+	.resource-layout {
+		display: grid;
+		grid-template-columns: 1fr 300px;
+		gap: var(--space-xl);
+	}
+
+	@media (max-width: 768px) {
+		.resource-layout {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.prose p {
+		margin-bottom: var(--space-sm);
+		font-size: 1.1rem;
+		line-height: 1.7;
+	}
+
+	.tags-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+</style>

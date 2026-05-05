@@ -1,0 +1,153 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allTeam = await getCollection('team');
+
+// Group by role
+const order = ['PI', 'Postdoc', 'PhD Student', 'Undergrad Student', 'Staff'];
+
+const groupedTeam = allTeam.reduce((acc, member) => {
+	const role = member.data.role;
+	if (!acc[role]) acc[role] = [];
+	acc[role].push(member);
+	return acc;
+}, {} as Record<string, any[]>);
+---
+
+<Layout title="Our Team">
+	<div class="page-header">
+		<div class="container">
+			<h1>Our Team</h1>
+			<p>Meet the researchers behind the science.</p>
+			
+			<div class="quick-nav mt-md">
+				{order.map(role => {
+					if (groupedTeam[role] && groupedTeam[role].length > 0) {
+						return <a href={`#${role.replace(/\s+/g, '-').toLowerCase()}`} class="tag" style="background-color: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">{role}s</a>;
+					}
+					return null;
+				})}
+			</div>
+		</div>
+	</div>
+
+	<div class="container section">
+		{order.map(role => {
+			if (groupedTeam[role] && groupedTeam[role].length > 0) {
+				return (
+					<div class="role-section" id={role.replace(/\s+/g, '-').toLowerCase()}>
+						<h2 class="role-title">{role}s</h2>
+						<div class="grid-team">
+							{groupedTeam[role].map(member => (
+								<div class="team-card card">
+									<a href={`/team/${member.id}`} style="text-decoration: none;" class="clickable-card-link">
+										{member.data.image ? (
+											<img src={member.data.image} alt={member.data.name} class="team-avatar" loading="lazy" />
+										) : (
+											<div class="team-avatar"></div>
+										)}
+										<h3>{member.data.name}</h3>
+									</a>
+									
+									<div class="social-links card-actions">
+										{member.data.googleScholar && <a href={member.data.googleScholar} target="_blank" rel="noopener">Scholar</a>}
+										{member.data.github && <a href={member.data.github} target="_blank" rel="noopener">GitHub</a>}
+										{member.data.orcid && <a href={member.data.orcid} target="_blank" rel="noopener">ORCID</a>}
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				);
+			}
+			return null;
+		})}
+
+		<div class="alumni-link text-center" style="margin-top: var(--space-xl);">
+			<p>Looking for past members?</p>
+			<a href="/alumni" class="btn btn-secondary mt-md">View Alumni</a>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+	}
+
+	.page-header p {
+		color: #cbd5e1;
+		font-size: 1.1rem;
+	}
+
+	.role-section {
+		margin-bottom: var(--space-lg);
+		scroll-margin-top: 5rem;
+	}
+
+	.role-title {
+		border-bottom: 2px solid var(--color-primary);
+		padding-bottom: var(--space-xs);
+		margin-bottom: var(--space-sm);
+		display: inline-block;
+	}
+
+	.grid-team {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+		gap: var(--space-md);
+	}
+
+	.team-card {
+		text-align: center;
+		padding: var(--space-sm);
+	}
+	
+	.team-card h3 {
+		color: var(--color-text);
+		font-size: 1.1rem;
+		margin-top: var(--space-xs);
+		transition: color var(--transition-fast);
+	}
+	
+	.team-card a:hover h3 {
+		color: var(--color-primary);
+	}
+
+	.team-avatar {
+		width: 150px;
+		height: 150px;
+		border-radius: var(--radius-full);
+		background-color: var(--color-bg);
+		margin: 0 auto var(--space-md);
+		border: 4px solid var(--color-white);
+		box-shadow: var(--shadow-sm);
+		object-fit: cover;
+		display: block;
+	}
+
+	.social-links {
+		display: flex;
+		justify-content: center;
+		gap: var(--space-sm);
+		margin-top: var(--space-sm);
+	}
+
+	.social-links a {
+		font-size: 0.9rem;
+		color: var(--color-text-muted);
+	}
+
+	.social-links a:hover {
+		color: var(--color-primary);
+	}
+</style>

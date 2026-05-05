@@ -1,0 +1,282 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Fetch collections
+const allNews = await getCollection('news');
+const latestNews = allNews
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const allResearch = await getCollection('research');
+const featuredResearch = allResearch
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, 3);
+
+const allTeam = await getCollection('team');
+const teamPreview = allTeam.slice(0, 3);
+
+// Manual stats configuration (set to null to use dynamic counts)
+const manualStats = {
+  publications: null, // e.g. 150
+  members: null,      // e.g. 15
+  years: 10           // manually set value
+};
+
+const displayStats = {
+  publications: manualStats.publications || allResearch.length,
+  members: manualStats.members || allTeam.length,
+  years: manualStats.years
+};
+---
+
+<Layout title="Home">
+	<section class="hero">
+		<div class="container hero-content">
+			<div class="hero-text">
+				<h1>Pioneering Computational Biology</h1>
+				<p>The Mangul Lab at Jagiellonian University develops robust computational methods to analyze complex genomic data and advance our understanding of biology and disease.</p>
+				<div class="hero-cta">
+					<a href="/research" class="btn btn-primary">Our Research</a>
+					<a href="/software" class="btn btn-secondary">Software Tools</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="stats-bar" style="background-color: var(--color-primary); color: white; padding: var(--space-sm) 0;">
+		<div class="container" style="display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: var(--space-md);">
+			<div class="stat-item">
+				<div style="font-size: 2rem; font-weight: 700; font-family: 'Outfit', sans-serif;">{displayStats.publications}</div>
+				<div style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">Publications</div>
+			</div>
+			<div class="stat-item">
+				<div style="font-size: 2rem; font-weight: 700; font-family: 'Outfit', sans-serif;">{displayStats.members}</div>
+				<div style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">Lab Members</div>
+			</div>
+			<div class="stat-item">
+				<div style="font-size: 2rem; font-weight: 700; font-family: 'Outfit', sans-serif;">{displayStats.years}+</div>
+				<div style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9;">Years of Research</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<div class="section-header">
+				<h2>Our Team</h2>
+				<a href="/team" class="view-all">Meet the whole team &rarr;</a>
+			</div>
+			<div class="team-preview-layout">
+				<div class="team-info">
+					<img src="https://mangul-lab-usc.github.io/images/team/IMG-3719.jpg" alt="Mangul Lab Team" style="width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-md); box-shadow: var(--shadow-md); object-fit: cover; aspect-ratio: 16/9;" loading="lazy" />
+					<p>We are a team of enthusiastic researchers aimed to combine open omics data with robust bioinformatics methods to enable novel biological discoveries. We are committed to ensuring an inclusive and supportive environment. We also believe in empowering the members of our team with necessary bioinformatics training and support, allowing them to make important contributions to the fields of biomedical research.</p>
+				</div>
+				<div class="grid-team">
+					{teamPreview.map(member => (
+						<div class="team-card card">
+							<a href={`/team/${member.id}`} style="text-decoration: none;" class="clickable-card-link">
+								{member.data.image ? (
+									<img src={member.data.image} alt={member.data.name} class="team-avatar" loading="lazy" />
+								) : (
+									<div class="team-avatar"></div>
+								)}
+								<h3>{member.data.name}</h3>
+							</a>
+							<p>{member.data.role}</p>
+							<div class="social-links card-actions" style="position: relative; z-index: 2;">
+								{member.data.googleScholar && <a href={member.data.googleScholar} target="_blank" rel="noopener">Scholar</a>}
+								{member.data.github && <a href={member.data.github} target="_blank" rel="noopener">GitHub</a>}
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="container">
+			<div class="section-header">
+				<h2>Latest Updates</h2>
+				<a href="/news" class="view-all">View all news &rarr;</a>
+			</div>
+			<div class="grid-cards">
+				{latestNews.map(news => (
+					<article class="card news-card">
+						{news.data.thumbnail && (
+							<img src={news.data.thumbnail} alt="" class="news-card-image" loading="lazy" />
+						)}
+						<div class="news-card-content">
+							{news.data.highlight && <span class="tag card-actions" style="background-color: var(--color-accent); color: white; display: inline-block;">Highlight</span>}
+							<h3><a href={`/news/${news.id}`} class="clickable-card-link">{news.data.title}</a></h3>
+							<p class="date">{news.data.date.toLocaleDateString()}</p>
+							<p>{news.data.description}</p>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+	<section class="section section-alt">
+		<div class="container">
+			<div class="section-header">
+				<h2>Featured Publications</h2>
+				<a href="/research" class="view-all">View all publications &rarr;</a>
+			</div>
+			<div class="grid-cards">
+				{featuredResearch.map(pub => (
+					<article class="card pub-card">
+						<span class="tag card-actions" style="display: inline-block;">{pub.data.type}</span>
+						<h3><a href={`/research/${pub.id}`} class="clickable-card-link">{pub.data.title}</a></h3>
+						<p class="authors">{pub.data.authors.join(', ')}</p>
+						<p class="meta">{pub.data.journal} ({pub.data.year})</p>
+					</article>
+				))}
+			</div>
+		</div>
+	</section>
+
+
+</Layout>
+
+<style>
+	.hero {
+		background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+		color: var(--color-white);
+		padding: 40px 0;
+		text-align: center;
+	}
+
+	.hero h1 {
+		color: var(--color-white);
+		font-size: 3rem;
+		margin-bottom: var(--space-md);
+	}
+
+	.hero p {
+		font-size: 1.25rem;
+		max-width: 800px;
+		margin: 0 auto var(--space-md);
+		color: #e2e8f0;
+	}
+
+	.hero-cta {
+		display: flex;
+		gap: var(--space-sm);
+		justify-content: center;
+	}
+
+	.section {
+		padding: var(--space-lg) 0;
+	}
+
+	.section-alt {
+		background-color: var(--color-white);
+		border-top: 1px solid var(--color-border);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: var(--space-md);
+	}
+
+	.view-all {
+		font-weight: 600;
+		color: var(--color-primary);
+	}
+
+	.date, .meta {
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.authors {
+		font-size: 0.95rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.team-preview-layout {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-xl);
+		align-items: start;
+	}
+
+	@media (max-width: 768px) {
+		.team-preview-layout {
+			grid-template-columns: 1fr;
+			gap: var(--space-lg);
+		}
+	}
+
+	.team-info p {
+		color: var(--color-text-muted);
+		text-align: justify;
+		line-height: 1.7;
+		margin-top: var(--space-sm);
+	}
+
+	.grid-team {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		gap: var(--space-md);
+	}
+
+	.team-card {
+		text-align: center;
+	}
+
+	.team-avatar {
+		width: 120px;
+		height: 120px;
+		border-radius: var(--radius-full);
+		background-color: var(--color-bg);
+		margin: 0 auto var(--space-sm);
+		border: 4px solid var(--color-white);
+		box-shadow: var(--shadow-sm);
+		object-fit: cover;
+		display: block;
+	}
+
+	.role {
+		color: var(--color-primary);
+		font-weight: 500;
+	}
+
+	.news-card {
+		padding: var(--space-sm);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	.news-card-image {
+		width: 90%;
+		height: 160px;
+		object-fit: cover;
+		object-position: center;
+		display: block;
+		border-radius: var(--radius-sm);
+		margin-top: var(--space-xs);
+	}
+	
+	.news-card-content {
+		padding: var(--space-sm);
+		width: 100%;
+		flex: 1;
+	}
+
+	.news-card h3 a, .pub-card h3 a {
+		color: var(--color-text);
+	}
+	
+	.news-card h3 a:hover, .pub-card h3 a:hover {
+		color: var(--color-primary);
+	}
+</style>

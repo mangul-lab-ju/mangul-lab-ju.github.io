@@ -1,0 +1,151 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Mangul Lab is a research lab focusing on bioinformatics, genomics, and computational biology." } = Astro.props;
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1); // remove the leading slash
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/png" href="/ml_logo4.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Mangul Lab</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="container header-container">
+				<a href="/" class="logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+					<img src="/ml_logo4.png" alt="" style="height: 32px; width: auto;" />
+					Mangul Lab
+				</a>
+				<nav>
+					<ul class="nav-links">
+						<li><a href="/research" class={currentPath.startsWith('research') ? 'active' : ''}>Research</a></li>
+						<li><a href="/news" class={currentPath.startsWith('news') ? 'active' : ''}>News</a></li>
+						<li><a href="/team" class={currentPath.startsWith('team') ? 'active' : ''}>Team</a></li>
+						<li><a href="/gallery" class={currentPath.startsWith('gallery') ? 'active' : ''}>Gallery</a></li>
+						<li><a href="/resources" class={currentPath.startsWith('resources') ? 'active' : ''}>Resources</a></li>
+						<li><a href="/contact" class={currentPath.startsWith('contact') ? 'active' : ''}>Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+
+		<footer class="site-footer">
+			<div class="container footer-content">
+				<div class="footer-col">
+					<div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+						<img src="/logo4v.png" alt="" style="height: 32px; width: auto;" />
+						<h3 style="margin: 0;">Mangul Lab</h3>
+					</div>
+					<p>Advancing computational biology and bioinformatics through open science and reproducibility.</p>
+				</div>
+				<div class="footer-col">
+					<h3>Quick Links</h3>
+					<ul style="list-style: none;">
+						<li><a href="/software">Software</a></li>
+						<li><a href="/education">Education</a></li>
+						<li><a href="/blog">Blog</a></li>
+						<li><a href="/funding">Funding</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h3>Contact</h3>
+					<p>Jagiellonian University<br>Kraków, Poland</p>
+					<a href="mailto:contact@mangullab.org">contact@mangullab.org</a>
+				</div>
+			</div>
+			<div class="container" style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; text-align: center; color: #cbd5e1; font-size: 0.9rem;">
+				&copy; {new Date().getFullYear()} Mangul Lab. All rights reserved.
+			</div>
+		</footer>
+
+		<script src="https://cdn.jsdelivr.net/npm/tsparticles-preset-links@2/tsparticles.preset.links.bundle.min.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				const headers = document.querySelectorAll('.page-header, .hero');
+				
+				headers.forEach((header, index) => {
+					const id = `tsparticles-${index}`;
+					const container = document.createElement('div');
+					container.id = id;
+					container.style.position = 'absolute';
+					container.style.top = '0';
+					container.style.left = '0';
+					container.style.width = '100%';
+					container.style.height = '100%';
+					container.style.zIndex = '0';
+					
+					// Make sure header has relative position and content has higher z-index
+					(header as HTMLElement).style.position = 'relative';
+					(header as HTMLElement).style.overflow = 'hidden';
+					
+					const children = Array.from(header.children);
+					children.forEach(child => {
+						(child as HTMLElement).style.position = 'relative';
+						(child as HTMLElement).style.zIndex = '1';
+					});
+
+					header.insertBefore(container, header.firstChild);
+
+					// @ts-ignore
+					tsParticles.load(id, {
+						preset: "links",
+						fullScreen: { enable: false },
+						background: {
+							color: "transparent",
+						},
+						particles: {
+							number: { value: 40, density: { enable: true, area: 800 } },
+							color: { value: "#ffffff" },
+							opacity: { value: 0.3 },
+							size: { value: 2 },
+							links: {
+								enable: true,
+								distance: 150,
+								color: "#ffffff",
+								opacity: 0.2,
+								width: 1,
+							},
+							move: {
+								enable: true,
+								speed: 1,
+								direction: "none",
+								random: false,
+								straight: false,
+								outModes: "out"
+							}
+						},
+						interactivity: {
+							events: {
+								onHover: { enable: true, mode: "grab" },
+								resize: true
+							},
+							modes: {
+								grab: { distance: 140, links: { opacity: 0.5 } }
+							}
+						}
+					});
+				});
+			});
+		</script>
+	</body>
+</html>

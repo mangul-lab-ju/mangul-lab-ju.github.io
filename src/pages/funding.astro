@@ -1,0 +1,64 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allFunding = await getCollection('funding');
+const activeFunding = allFunding.filter(f => f.data.active);
+const pastFunding = allFunding.filter(f => !f.data.active);
+---
+
+<Layout title="Funding">
+	<div class="page-header">
+		<div class="container">
+			<h1>Funding & Grants</h1>
+			<p>We are grateful for the support from our funding agencies.</p>
+		</div>
+	</div>
+
+	<div class="container section">
+		<h2 style="margin-bottom: var(--space-md); border-bottom: 2px solid var(--color-primary); padding-bottom: var(--space-xs); display: inline-block;">Active Funding</h2>
+		<div class="grid-cards" style="margin-bottom: var(--space-xl);">
+			{activeFunding.map(grant => (
+				<div class="card" style="border-left: 4px solid var(--color-primary);">
+					<h3>{grant.data.name}</h3>
+					<p style="color: var(--color-text-muted); margin-bottom: var(--space-xs);">{grant.data.institution}</p>
+					<p><strong>Period:</strong> {grant.data.period}</p>
+				</div>
+			))}
+		</div>
+
+		{pastFunding.length > 0 && (
+			<>
+				<h2 style="margin-bottom: var(--space-md); border-bottom: 2px solid var(--color-border); padding-bottom: var(--space-xs); display: inline-block;">Past Funding</h2>
+				<div class="grid-cards">
+					{pastFunding.map(grant => (
+						<div class="card">
+							<h3>{grant.data.name}</h3>
+							<p style="color: var(--color-text-muted); margin-bottom: var(--space-xs);">{grant.data.institution}</p>
+							<p><strong>Period:</strong> {grant.data.period}</p>
+						</div>
+					))}
+				</div>
+			</>
+		)}
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+	}
+
+	.page-header p {
+		color: #cbd5e1;
+		font-size: 1.1rem;
+	}
+</style>

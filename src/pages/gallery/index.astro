@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allGallery = await getCollection('gallery');
+const sortedEvents = allGallery.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Layout title="Gallery">
+	<div class="page-header">
+		<div class="container">
+			<h1>Gallery</h1>
+			<p>Photos from our events, conferences, and lab life.</p>
+		</div>
+	</div>
+
+	<div class="container section">
+		<div class="grid-cards">
+			{sortedEvents.map(event => (
+				<article class="card gallery-card">
+					<div class="gallery-cover">
+						<img src={event.data.cover} alt={event.data.title} loading="lazy" />
+					</div>
+					<div class="gallery-content">
+						<p class="date">{event.data.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+						<h3 class="card-actions" style="position: relative; z-index: 2;"><a href={`/gallery/${event.id}`} class="clickable-card-link">{event.data.title}</a></h3>
+						<p>{event.data.images.length} photos</p>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+		text-align: center;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+	}
+
+	.page-header p {
+		color: #cbd5e1;
+		font-size: 1.1rem;
+	}
+
+	.grid-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		gap: var(--space-lg);
+	}
+
+	.gallery-card {
+		padding: 0;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.gallery-cover {
+		width: 100%;
+		height: 200px;
+		overflow: hidden;
+	}
+
+	.gallery-cover img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform var(--transition-normal);
+	}
+
+	.gallery-card:hover .gallery-cover img {
+		transform: scale(1.05);
+	}
+
+	.gallery-content {
+		padding: var(--space-md);
+		flex: 1;
+	}
+
+	.date {
+		color: var(--color-primary);
+		font-weight: 600;
+		font-size: 0.9rem;
+		margin-bottom: 0.5rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+</style>

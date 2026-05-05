@@ -1,0 +1,204 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const team = await getCollection('team');
+  return team.map(entry => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+// Get member's publications
+const allResearch = await getCollection('research');
+const memberPublications = allResearch.filter(pub => 
+  pub.data.authors.some(author => author.includes(entry.data.name) || entry.data.name.includes(author))
+).sort((a, b) => b.data.year - a.data.year);
+---
+
+<Layout title={entry.data.name}>
+	<div class="page-header">
+		<div class="container">
+			<a href="/team" class="back-link">&larr; Back to Team</a>
+			<h1>{entry.data.name}</h1>
+			<p>{entry.data.role}</p>
+		</div>
+	</div>
+
+	<div class="container section">
+		<div class="member-layout">
+			<aside class="member-sidebar">
+				<div class="member-avatar">
+					{entry.data.image ? (
+						<img src={entry.data.image} alt={entry.data.name} />
+					) : (
+						<div class="avatar-placeholder"></div>
+					)}
+				</div>
+				
+				<div class="card action-card mt-md">
+					<h3>Links</h3>
+					<div class="links-list">
+						{entry.data.googleScholar && <a href={entry.data.googleScholar} target="_blank" rel="noopener">Google Scholar</a>}
+						{entry.data.github && <a href={entry.data.github} target="_blank" rel="noopener">GitHub</a>}
+						{entry.data.orcid && <a href={entry.data.orcid} target="_blank" rel="noopener">ORCID</a>}
+						{entry.data.cv && <a href={entry.data.cv} target="_blank" rel="noopener">Curriculum Vitae</a>}
+					</div>
+				</div>
+
+				{entry.data.interests && entry.data.interests.length > 0 && (
+					<div class="card tags-card mt-md">
+						<h3>Research Interests</h3>
+						<div class="tags-container">
+							{entry.data.interests.map(interest => (
+								<span class="tag">{interest}</span>
+							))}
+						</div>
+					</div>
+				)}
+			</aside>
+
+			<div class="member-content">
+				<section class="bio-section mb-lg">
+					<h2>Biography</h2>
+					<div class="prose">
+						<Content />
+					</div>
+				</section>
+
+				{memberPublications.length > 0 && (
+					<section class="publications-section">
+						<h2>Selected Publications</h2>
+						<div class="grid-cards" style="grid-template-columns: 1fr;">
+							{memberPublications.map(pub => (
+								<article class="card pub-card">
+									<span class="tag">{pub.data.type}</span>
+									<h3><a href={`/research/${pub.id}`}>{pub.data.title}</a></h3>
+									<p class="authors">{pub.data.authors.join(', ')}</p>
+									<p class="meta">{pub.data.journal} ({pub.data.year})</p>
+								</article>
+							))}
+						</div>
+					</section>
+				)}
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.page-header {
+		background-color: var(--color-primary-dark);
+		color: var(--color-white);
+		padding: var(--space-lg) 0;
+	}
+
+	.page-header h1 {
+		color: var(--color-white);
+		margin-bottom: var(--space-xs);
+		font-size: 2.5rem;
+	}
+
+	.page-header p {
+		color: #cbd5e1;
+		font-size: 1.2rem;
+	}
+
+	.back-link {
+		color: #cbd5e1;
+		display: inline-block;
+		margin-bottom: var(--space-sm);
+		font-weight: 500;
+	}
+
+	.back-link:hover {
+		color: var(--color-white);
+	}
+
+	.member-layout {
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		gap: var(--space-xl);
+	}
+
+	@media (max-width: 768px) {
+		.member-layout {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.member-avatar {
+		width: 100%;
+		aspect-ratio: 1;
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		background-color: var(--color-bg);
+		border: 4px solid var(--color-white);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.member-avatar img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.avatar-placeholder {
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+	}
+
+	.links-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.links-list a {
+		font-weight: 500;
+	}
+
+	.tags-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.bio-section h2, .publications-section h2 {
+		margin-bottom: var(--space-md);
+		border-bottom: 2px solid var(--color-border);
+		padding-bottom: var(--space-xs);
+	}
+
+	.pub-card {
+		padding: var(--space-md);
+	}
+
+	.pub-card h3 {
+		margin-top: var(--space-xs);
+		margin-bottom: var(--space-xs);
+	}
+	
+	.pub-card h3 a {
+		color: var(--color-text);
+	}
+	
+	.pub-card h3 a:hover {
+		color: var(--color-primary);
+	}
+
+	.authors {
+		font-size: 0.95rem;
+		margin-bottom: 0.2rem;
+	}
+
+	.meta {
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
+	}
+</style>
