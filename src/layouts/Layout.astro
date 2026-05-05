@@ -28,11 +28,18 @@ const currentPath = pathname.slice(1); // remove the leading slash
 	<body>
 		<header class="site-header">
 			<div class="container header-container">
-				<a href="/" class="logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+				<a href="/" class="logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; position: relative; z-index: 51;">
 					<img src="/ml_logo4.png" alt="" style="height: 32px; width: auto;" />
 					Mangul Lab
 				</a>
-				<nav>
+				<button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" style="position: relative; z-index: 51;">
+					<svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="3" y1="12" x2="21" y2="12"></line>
+						<line x1="3" y1="6" x2="21" y2="6"></line>
+						<line x1="3" y1="18" x2="21" y2="18"></line>
+					</svg>
+				</button>
+				<nav id="main-nav">
 					<ul class="nav-links">
 						<li><a href="/research" class={currentPath.startsWith('research') ? 'active' : ''}>Research</a></li>
 						<li><a href="/news" class={currentPath.startsWith('news') ? 'active' : ''}>News</a></li>
@@ -145,6 +152,18 @@ const currentPath = pathname.slice(1); // remove the leading slash
 						}
 					});
 				});
+			});
+
+			document.addEventListener("DOMContentLoaded", () => {
+				const toggleBtn = document.getElementById('mobile-menu-toggle');
+				const navLinks = document.querySelector('.nav-links');
+				
+				if (toggleBtn && navLinks) {
+					toggleBtn.addEventListener('click', () => {
+						navLinks.classList.toggle('is-active');
+						document.body.style.overflow = navLinks.classList.contains('is-active') ? 'hidden' : '';
+					});
+				}
 			});
 		</script>
 	</body>
