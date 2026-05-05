@@ -1,6 +1,6 @@
 ---
 name: "Sergey Knyazev"
-role: "POSTDOC # DEGREE: <PI / POSTDOC / PHD / MASTERS / UNDERGRAD / HIGHSCHOOL>"
+role: "POSTDOC"
 github: "https://github.com/Sergey-Knyazev"
 googleScholar: ""
 image: "/images/team/Sergey-Knyazev.jpg"
