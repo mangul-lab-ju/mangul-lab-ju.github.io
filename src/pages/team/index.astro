@@ -4,15 +4,54 @@ import { getCollection } from 'astro:content';
 
 const allTeam = await getCollection('team');
 
-// Group by role
-const order = ['PI', 'Postdoc', 'PhD Student', 'Undergrad Student', 'Staff'];
+// Normalize role names for better display
+const normalizeRole = (role: string) => {
+	if (!role) return 'Other';
+	role = role.trim();
+	if (role.startsWith('POSTDOC')) return 'Postdoc';
+	if (role.toUpperCase() === 'MASTERS') return 'Masters Student';
+	if (role.toUpperCase() === 'UNDERGRAD') return 'Undergraduate Student';
+	if (role.toUpperCase() === 'HIGHSCHOOL') return 'High School Student';
+	if (role.toUpperCase() === 'PHARMD') return 'PharmD Student';
+	if (role.toUpperCase() === 'BIOINFORMATICS-ANALYST') return 'Bioinformatics Analyst';
+	if (role.toUpperCase() === 'AFFILIATE') return 'Affiliate';
+	if (role.toUpperCase() === 'PI') return 'Principal Investigator';
+	if (role === 'PhD Student') return 'PhD Student';
+	return role.charAt(0).toUpperCase() + role.slice(1).toLowerCase();
+};
 
 const groupedTeam = allTeam.reduce((acc, member) => {
-	const role = member.data.role;
+	const role = normalizeRole(member.data.role);
 	if (!acc[role]) acc[role] = [];
 	acc[role].push(member);
 	return acc;
 }, {} as Record<string, any[]>);
+
+const preferredOrder = [
+	'Principal Investigator',
+	'Postdoc',
+	'PhD Student',
+	'Masters Student',
+	'PharmD Student',
+	'Undergraduate Student',
+	'High School Student',
+	'Bioinformatics Analyst',
+	'Staff',
+	'Affiliate',
+	'Other'
+];
+
+const foundRoles = Object.keys(groupedTeam);
+const order = [
+	...preferredOrder.filter(r => foundRoles.includes(r)),
+	...foundRoles.filter(r => !preferredOrder.includes(r)).sort()
+];
+
+const pluralizeRole = (role: string) => {
+	if (['Staff', 'Other', 'Alumni'].includes(role)) return role;
+	if (role.endsWith('s')) return role;
+	return role + 's';
+};
 ---
 
 <Layout title="Our Team">
@@ -24,7 +63,7 @@ const groupedTeam = allTeam.reduce((acc, member) => {
 			<div class="quick-nav mt-md">
 				{order.map(role => {
 					if (groupedTeam[role] && groupedTeam[role].length > 0) {
-						return <a href={`#${role.replace(/\s+/g, '-').toLowerCase()}`} class="tag" style="background-color: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">{role}s</a>;
+						return <a href={`#${role.replace(/\s+/g, '-').toLowerCase()}`} class="tag" style="background-color: rgba(255,255,255,0.2); color: white; border: 1px solid rgba(255,255,255,0.3);">{pluralizeRole(role)}</a>;
 					}
 					return null;
 				})}
@@ -37,7 +76,7 @@ const groupedTeam = allTeam.reduce((acc, member) => {
 			if (groupedTeam[role] && groupedTeam[role].length > 0) {
 				return (
 					<div class="role-section" id={role.replace(/\s+/g, '-').toLowerCase()}>
-						<h2 class="role-title">{role}s</h2>
+						<h2 class="role-title">{pluralizeRole(role)}</h2>
 						<div class="grid-team">
 							{groupedTeam[role].map(member => (
 								<div class="team-card card">
