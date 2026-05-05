@@ -149,6 +149,30 @@ a:hover {
   color: var(--color-primary-dark);
 }
 
+.logo:hover {
+  color: var(--color-primary-dark);
+}
+
+.logo-text {
+  background: linear-gradient(
+    110deg,
+    var(--color-primary-dark) 40%,
+    #F8C53A 50%,
+    var(--color-primary-dark) 60%
+  );
+  background-size: 300% auto;
+  color: var(--color-primary-dark);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.6s ease-in-out;
+  background-position: 100% center;
+}
+
+.logo:hover .logo-text {
+  background-position: 0% center;
+}
+
 .nav-links {
   display: flex;
   gap: var(--space-md);
