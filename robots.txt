@@ -1,3 +1,4 @@
 User-agent: *
-Disallow:
-Sitemap: https://mangul-lab-ju.github.io/sitemap.xml
+Allow: /
+
+Sitemap: https://mangul-lab-ju.github.io/sitemap-index.xml
