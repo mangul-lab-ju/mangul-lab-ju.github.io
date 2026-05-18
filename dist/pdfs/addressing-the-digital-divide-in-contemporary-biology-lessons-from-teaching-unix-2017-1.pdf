@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://api.nva.unit.no" />
+    <link rel="dns-prefetch" href="https://api.nva.unit.no" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Nasjonalt vitenarkiv" />
+    <link rel="manifest" href="/manifest.json" />
+    <style>
+      mjx-container {
+        /* Avoid line-breaks for mathjax elements */
+        display: inline !important;
+        font-size: 100% !important;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-BbccJK4W.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/rolldown-runtime-BYbx6iT9.js">
+    <link rel="modulepreload" crossorigin href="/assets/@aws-amplify-D5FR69dW.js">
+    <link rel="modulepreload" crossorigin href="/assets/@mui-Z64nc3UM.js">
+    <link rel="modulepreload" crossorigin href="/assets/@tanstack-BuYIJ2q8.js">
+    <link rel="modulepreload" crossorigin href="/assets/axios-CEjzGNxk.js">
+    <link rel="modulepreload" crossorigin href="/assets/axios-mock-adapter-BTRbfXG2.js">
+    <link rel="modulepreload" crossorigin href="/assets/date-fns-DcoKTP_r.js">
+    <link rel="modulepreload" crossorigin href="/assets/formik-hk7q55Fx.js">
+    <link rel="modulepreload" crossorigin href="/assets/i18next-browser-languagedetector-CW5S55DL.js">
+    <link rel="modulepreload" crossorigin href="/assets/i18next-BKnTYXaA.js">
+    <link rel="modulepreload" crossorigin href="/assets/yup-a4XmKniV.js">
+    <link rel="modulepreload" crossorigin href="/assets/user.types-VTKhAfnP.js">
+    <link rel="modulepreload" crossorigin href="/assets/constants-DDXhhEBi.js">
+    <link rel="modulepreload" crossorigin href="/assets/dataTestIds-SRuNyNur.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-DkvZIQG0.css">
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
