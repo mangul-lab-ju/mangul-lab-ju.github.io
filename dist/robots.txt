@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://mangul-lab-ju.github.io/sitemap-index.xml
